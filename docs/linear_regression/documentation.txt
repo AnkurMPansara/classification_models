@@ -1,0 +1,102 @@
+## Linear Regression Class Documentation
+
+
+### Overview:
+
+The `LinearRegression` class is a Python implementation of a simple linear regression model. It provides functionality for training the model using gradient descent, testing its performance, and saving/loading the trained model parameters.
+
+
+### Mathematical Explanation of Linear Regression:
+
+Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. In its simplest form, with one independent variable, linear regression fits a straight line to the data. The equation for a simple linear regression model can be expressed as:
+
+y = mx + c
+
+Where:
+- `y` is the dependent variable (target)
+- `x` is the independent variable (feature)
+- `m` is the slope of the line
+- `c` is the intercept (bias)
+
+The goal of linear regression is to find the best-fitting line that minimizes the difference between the predicted values (`y_pred`) and the actual values (`y`) in the training data. This is typically done by minimizing the mean squared error (MSE) or mean absolute error (MAE) between `y_pred` and `y`.
+
+
+### Usage:
+
+1. **Initialization:**
+
+    ```python
+    lr_model = LinearRegression()
+    ```
+
+2. **Data Preparation:**
+
+    ```python
+    train_input, train_output, test_input, test_output = lr_model.prepare_data(data_path, split_ratio)
+    ```
+
+    - `data_path` (string): Path to the CSV file containing the dataset.
+    - `split_ratio` (float): Ratio to split the dataset into training and testing data. Default is 0.7.
+
+3. **Training:**
+
+    ```python
+    lr_model.train(train_input, train_output, learning_rate, iterations)
+    ```
+
+    - `learning_rate` (float): Learning rate for gradient descent.
+    - `iterations` (int): Number of iterations for training.
+
+4. **Testing:**
+
+    ```python
+    lr_model.test(test_input, test_output)
+    ```
+
+    This function tests the model's accuracy on the provided testing data.
+
+5. **Saving and Loading Model:**
+
+    ```python
+    lr_model.save_model(file_path)
+    lr_model.load_model(file_path)
+    ```
+
+    - `file_path` (string): Path to save or load the model parameters.
+
+
+### Methods:
+
+- **prepare_data(path, split_ratio):**
+    - Cleans the data, splits it into training and testing sets, and prepares the input and output arrays.
+
+- **train(train_input, train_output, learning_rate, iterations):**
+    - Trains the linear regression model using gradient descent.
+
+- **test(test_input, test_output):**
+    - Evaluates the model's accuracy on the provided testing data.
+
+- **save_model(file_path):**
+    - Saves the trained model parameters to a file.
+
+- **load_model(file_path):**
+    - Loads a trained model from a file.
+
+
+### Attributes:
+
+- **parameters:**
+    - Dictionary containing the model parameters (`m` for slope and `c` for intercept).
+
+- **loss:**
+    - List containing the loss values during training iterations.
+
+
+### Example:
+
+```python
+lr_model = LinearRegression()
+train_input, train_output, test_input, test_output = lr_model.prepare_data('data.csv', split_ratio=0.7)
+lr_model.train(train_input, train_output, learning_rate=0.0001, iterations=20)
+lr_model.test(test_input, test_output)
+lr_model.save_model('linear_regression_model.pkl')
