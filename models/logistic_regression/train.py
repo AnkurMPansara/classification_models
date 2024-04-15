@@ -75,14 +75,22 @@ class LogisticRegression:
             # Append loss and print 
             self.loss.append(cost) 
             print("Iteration = {}, Loss = {}".format(i + 1, cost))
+            if cost < prev_cost:
+                learning_rate *= 2  # Increase learning rate by 5%
+            else:
+                learning_rate *= 0.5   # Decrease learning rate by half
+            prev_cost = cost
     
     def test(self, test_input, test_output):
-        #predict values
+        # Predict values
         predictions = self.forward_pass(test_input)
-        #calculate its accuracy
-        error = np.abs(predictions - test_output) / np.abs(test_output)
-        accuracy = np.mean(1 - error)
-        print("Accuracy = {}".format(accuracy))
+        # Threshold predictions to get binary classes
+        binary_predictions = (predictions >= 0.7).astype(int)
+        # Threshold test_output to get binary classes
+        binary_output = (test_output >= 0.7).astype(int)
+        # Calculate accuracy
+        accuracy = np.mean(binary_predictions == binary_output)
+        print("Accuracy =", accuracy)
     
     def save_model(self, file_path):
         #save the model into .model file
@@ -106,7 +114,7 @@ if __name__ == "__main__":
     #preparing data
     train_input, train_output, test_input, test_output = lg_model.prepare_data('../../data/numeric_probabilistic/data.csv', 0.7)
     #train the model
-    learning_rate = 0.001
+    learning_rate = 0.0001
     iterations = 1000
     lg_model.train(train_input, train_output, learning_rate, iterations)
     #test the model
