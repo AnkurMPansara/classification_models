@@ -120,4 +120,4 @@ if __name__ == "__main__":
     #test the model
     lg_model.test(test_input, test_output)
     #save the model
-    lg_model.save_model('output/linear_regression.model')
+    lg_model.save_model('output/logistic_regression.model')
