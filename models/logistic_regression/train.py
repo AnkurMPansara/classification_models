@@ -90,7 +90,7 @@ class LogisticRegression:
         binary_output = (test_output >= 0.7).astype(int)
         # Calculate accuracy
         accuracy = np.mean(binary_predictions == binary_output)
-        print("Accuracy =", accuracy)
+        print("Accuracy = {}".format(accuracy))
     
     def save_model(self, file_path):
         #save the model into .model file
