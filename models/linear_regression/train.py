@@ -73,11 +73,14 @@ class LinearRegression:
             print("Iteration = {}, Loss = {}".format(i + 1, cost))
     
     def test(self, test_input, test_output):
-        #predict values
+        # Predict values
         predictions = self.forward_pass(test_input)
-        #calculate its accuracy
-        error = np.abs(predictions - test_output) / np.abs(test_output)
-        accuracy = np.mean(1 - error)
+        # Threshold predictions to get binary classes
+        binary_predictions = (predictions >= 0.7).astype(int)
+        # Threshold test_output to get binary classes
+        binary_output = (test_output >= 0.7).astype(int)
+        # Calculate accuracy
+        accuracy = np.mean(binary_predictions == binary_output)
         print("Accuracy = {}".format(accuracy))
     
     def save_model(self, file_path):
