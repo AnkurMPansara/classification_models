@@ -1,0 +1,65 @@
+## Linear Regression Class Documentation
+
+
+### Overview:
+
+The `KNN` class is a Python implementation of a simple k-nearest neighbors classifier model. It provides functionality for classifying a data point based on nearest neighbors class.
+
+
+### Mathematical Explanation of Linear Regression:
+
+Linear regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. In its simplest form, with one independent variable, linear regression fits a straight line to the data. The equation for a simple linear regression model can be expressed as:
+
+y = mx + c
+
+Where:
+- `y` is the dependent variable (target)
+- `x` is the independent variable (feature)
+- `m` is the slope of the line
+- `c` is the intercept (bias)
+
+The goal of linear regression is to find the best-fitting line that minimizes the difference between the predicted values (`y_pred`) and the actual values (`y`) in the training data. This is typically done by minimizing the mean squared error (MSE) or mean absolute error (MAE) between `y_pred` and `y`.
+
+
+### Usage:
+
+1. **Initialization:**
+
+    ```python
+    knn = KNN()
+    ```
+
+2. **Data Preparation:**
+
+    ```python
+    train_input, train_output, test_input, test_output = knn.prepare_data(data_path, split_ratio)
+    ```
+
+    - `data_path` (string): Path to the CSV file containing the dataset.
+    - `split_ratio` (float): Ratio to split the dataset into training and testing data. Default is 0.7.
+
+
+3. **Testing:**
+
+    ```python
+    knn.test(train_input, train_output, test_input, test_output, k)
+    ```
+
+    This function tests the model's accuracy on the provided testing data.
+
+### Methods:
+
+- **prepare_data(path, split_ratio):**
+    - Cleans the data, splits it into training and testing sets, and prepares the input and output arrays.
+
+- **test(train_input, train_output, test_input, test_output, k):**
+    - Evaluates the model's accuracy on the provided testing data.
+
+
+### Example:
+
+```python
+knn = KNN()
+train_input, train_output, test_input, test_output = knn.prepare_data('../../data/classification_euclidean/data.csv', 0.7)
+accuracy = knn.test(train_input, train_output, test_input, test_output, 3)
+print("Accuracy of the KNN algorithm:", accuracy)
